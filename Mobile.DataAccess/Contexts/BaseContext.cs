@@ -5,9 +5,14 @@ namespace Mobile.DataAccess.Contexts
 {
     public class BaseContext : DbContext
     {
-        public BaseContext()
+        public BaseContext(DbContextOptions<MobileReadContext> options) : base(options)
         {
-            Database.EnsureCreated();
+
+        }
+
+        public BaseContext(DbContextOptions<MobileWriteContext> options) : base(options)
+        {
+
         }
 
         public DbSet<Device> Devices { get; set; }
