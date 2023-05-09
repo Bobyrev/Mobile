@@ -31,7 +31,6 @@ namespace Mobile.Api.ApplicationLogic.Device.Query
                 DeviceName = model.DeviceName,
                 IsActivated = model.IsActivated,
                 LastModifiedDate = model.LastModifiedDate,
-                UserEmail = model.UserEmail,
             };
         }
     }

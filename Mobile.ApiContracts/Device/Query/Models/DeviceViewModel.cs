@@ -33,11 +33,6 @@
         public Guid DeviceCode { get; set; }
 
         /// <summary>
-        /// Электронная почта пользователя
-        /// </summary>
-        public string UserEmail { get; set; }
-
-        /// <summary>
         /// Признак активации приложения
         /// </summary>
         public bool IsActivated { get; set; }

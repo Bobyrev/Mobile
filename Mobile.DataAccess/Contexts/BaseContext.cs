@@ -16,5 +16,8 @@ namespace Mobile.DataAccess.Contexts
         }
 
         public DbSet<Device> Devices { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Settings> Settings { get; set; }
+        public DbSet<ColorScheme> ColorSchemes { get; set; }
     }
 }

@@ -16,8 +16,8 @@ builder.Services.AddDbContext<MobileReadContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("MobileDB"));
     options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+    options.UseLazyLoadingProxies();
 });
-
 
 builder.Services.AddDbContext<MobileWriteContext>(options =>
 {

@@ -23,7 +23,6 @@ namespace Mobile.Api.ApplicationLogic.Device.Command
                 DeviceModel = request.DeviceModel,
                 DeviceName = request.DeviceName,
                 IsActivated = request.IsActivated,
-                UserEmail = request.UserEmail
             };
 
             await _mobileWriteContext.Devices.AddAsync(device, cancellationToken);

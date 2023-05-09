@@ -22,7 +22,6 @@ namespace Mobile.Api.ApplicationLogic.Device.Command
             model.DeviceModel = request.DeviceModel;
             model.DeviceName = request.DeviceName;
             model.IsActivated = request.IsActivated;
-            model.UserEmail = request.UserEmail;
 
             await _mobileWriteContext.SaveChangesAsync(cancellationToken);
         }
