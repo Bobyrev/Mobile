@@ -32,23 +32,20 @@ namespace Mobile.Api.ApplicationLogic.Device.Command
                 LastModifiedDate = DateTime.Now,
                 Devices = new List<DataAccess.Models.Device> { device },
                 UserMail = request.UserEmail,
-                Settings = new List<DataAccess.Models.Settings>
+                Settings = new DataAccess.Models.Settings
                 {
-                    new DataAccess.Models.Settings
+                    CreatedDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
+                    EnableAutoPayment = false,
+                    ShowAdv = false,
+                    UseLocation = "Тюмень",
+                    ColorScheme = new ColorScheme
                     {
-                        CreatedDate = DateTime.Now,
                         LastModifiedDate = DateTime.Now,
-                        EnableAutoPayment = false,
-                        ShowAdv = false,
-                        UseLocation = "Тюмень",
-                        ColorScheme = new ColorScheme
-                        {
-                            LastModifiedDate = DateTime.Now,
-                            CreatedDate = DateTime.Now,
-                            BackgoundColor = "white",
-                            ButtonsColor = "black",
-                            TextColor = "red"
-                        }
+                        CreatedDate = DateTime.Now,
+                        BackgoundColor = "white",
+                        ButtonsColor = "black",
+                        TextColor = "red"
                     }
                 }
             };

@@ -17,8 +17,8 @@ namespace Mobile.DataAccess.Configurations
 
             builder
                 .HasOne(x => x.User)
-                .WithMany(x => x.Settings)
-                .HasForeignKey(x => x.UserId)
+                .WithOne(x => x.Settings)
+                .HasForeignKey<Settings>(x => x.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

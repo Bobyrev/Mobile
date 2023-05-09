@@ -22,13 +22,24 @@ namespace Mobile.Api.ApplicationLogic.Settings.Query
                 return new SettingsResponseViewModel
                 {
                     IsRegistered = false,
+                    Message = "Емаил не указан",
+                    Settings = null
+                };
+            }
+
+            var user = await _mobileReadContext.Users.FirstOrDefaultAsync(x => x.UserMail == request.UserMail);
+
+            if (user is null) 
+            {
+                return new SettingsResponseViewModel
+                {
+                    IsRegistered = false,
                     Message = "Пользователь не найден",
                     Settings = null
                 };
             }
 
-            var user = await _mobileReadContext.Users.FirstAsync(x => x.UserMail == request.UserMail);
-            var settings = user.Settings.FirstOrDefault();
+            var settings = user.Settings;
             var colorScheme = settings?.ColorScheme;
 
             return new SettingsResponseViewModel

@@ -17,7 +17,7 @@ namespace Mobile.DataAccess.Models
         /// <summary>
         /// Настройки
         /// </summary>
-        public virtual List<Settings> Settings { get; set; } = null!;
+        public virtual Settings Settings { get; set; } = null!;
 
         /// <summary>
         /// Девайсы пользоваеля
