@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mobile.DataAccess.Contexts;
 
@@ -11,9 +12,11 @@ using Mobile.DataAccess.Contexts;
 namespace Mobile.DataAccess.Migrations
 {
     [DbContext(typeof(MobileReadContext))]
-    partial class MobileReadContextModelSnapshot : ModelSnapshot
+    [Migration("20230509170258_AddCascadeDelete")]
+    partial class AddCascadeDelete
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -124,15 +127,10 @@ namespace Mobile.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ColorSchemeId")
                         .IsUnique();
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Settings", (string)null);
                 });
@@ -151,11 +149,17 @@ namespace Mobile.DataAccess.Migrations
                     b.Property<DateTime>("LastModifiedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<long>("SettingsId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("UserMail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SettingsId")
+                        .IsUnique();
 
                     b.ToTable("Users", (string)null);
                 });
@@ -179,15 +183,18 @@ namespace Mobile.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Mobile.DataAccess.Models.User", "User")
-                        .WithMany("Settings")
-                        .HasForeignKey("UserId")
+                    b.Navigation("ColorScheme");
+                });
+
+            modelBuilder.Entity("Mobile.DataAccess.Models.User", b =>
+                {
+                    b.HasOne("Mobile.DataAccess.Models.Settings", "Settings")
+                        .WithOne("User")
+                        .HasForeignKey("Mobile.DataAccess.Models.User", "SettingsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ColorScheme");
-
-                    b.Navigation("User");
+                    b.Navigation("Settings");
                 });
 
             modelBuilder.Entity("Mobile.DataAccess.Models.ColorScheme", b =>
@@ -196,11 +203,15 @@ namespace Mobile.DataAccess.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Mobile.DataAccess.Models.Settings", b =>
+                {
+                    b.Navigation("User")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Mobile.DataAccess.Models.User", b =>
                 {
                     b.Navigation("Devices");
-
-                    b.Navigation("Settings");
                 });
 #pragma warning restore 612, 618
         }

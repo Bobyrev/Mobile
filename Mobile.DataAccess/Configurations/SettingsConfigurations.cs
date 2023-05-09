@@ -12,9 +12,14 @@ namespace Mobile.DataAccess.Configurations
             builder.HasKey(x => x.Id);
             builder
                 .HasOne(x => x.ColorScheme)
+                .WithOne(x => x.Settings)
+                .HasForeignKey<Settings>(x => x.ColorSchemeId);
+
+            builder
+                .HasOne(x => x.User)
                 .WithMany(x => x.Settings)
-                .HasForeignKey(x => x.ColorSchemeId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(x => x.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

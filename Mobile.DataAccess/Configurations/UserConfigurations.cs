@@ -10,11 +10,6 @@ namespace Mobile.DataAccess.Configurations
         {
             builder.ToTable("Users");
             builder.HasKey(x => x.Id);
-            builder
-                .HasOne(x => x.Settings)
-                .WithMany(x => x.Users)
-                .HasForeignKey(x => x.SettingsId)
-                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

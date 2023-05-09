@@ -10,6 +10,12 @@ namespace Mobile.DataAccess.Configurations
         {
             builder.ToTable("ColorSchemes");
             builder.HasKey(x => x.Id);
+
+            builder
+                .HasOne(x => x.Settings)
+                .WithOne(x => x.ColorScheme)
+                .HasForeignKey<Settings>(x => x.ColorSchemeId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

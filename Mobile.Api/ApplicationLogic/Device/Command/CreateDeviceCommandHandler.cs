@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Mobile.ApiContracts.Device.Command;
 using Mobile.DataAccess.Contexts;
+using Mobile.DataAccess.Models;
 
 namespace Mobile.Api.ApplicationLogic.Device.Command
 {
@@ -25,7 +26,34 @@ namespace Mobile.Api.ApplicationLogic.Device.Command
                 IsActivated = request.IsActivated,
             };
 
-            await _mobileWriteContext.Devices.AddAsync(device, cancellationToken);
+            var user = new User
+            {
+                CreatedDate = DateTime.Now,
+                LastModifiedDate = DateTime.Now,
+                Devices = new List<DataAccess.Models.Device> { device },
+                UserMail = request.UserEmail,
+                Settings = new List<DataAccess.Models.Settings>
+                {
+                    new DataAccess.Models.Settings
+                    {
+                        CreatedDate = DateTime.Now,
+                        LastModifiedDate = DateTime.Now,
+                        EnableAutoPayment = false,
+                        ShowAdv = false,
+                        UseLocation = "Тюмень",
+                        ColorScheme = new ColorScheme
+                        {
+                            LastModifiedDate = DateTime.Now,
+                            CreatedDate = DateTime.Now,
+                            BackgoundColor = "white",
+                            ButtonsColor = "black",
+                            TextColor = "red"
+                        }
+                    }
+                }
+            };
+
+            await _mobileWriteContext.Users.AddAsync(user, cancellationToken);
             await _mobileWriteContext.SaveChangesAsync(cancellationToken);
         }
     }

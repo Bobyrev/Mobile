@@ -15,14 +15,9 @@ namespace Mobile.DataAccess.Models
         public string UserMail { get; set; } = null!;
 
         /// <summary>
-        /// Идентификатор настроек
-        /// </summary>
-        public long SettingsId { get; set; }
-
-        /// <summary>
         /// Настройки
         /// </summary>
-        public virtual Settings Settings { get; set; } = null!;
+        public virtual List<Settings> Settings { get; set; } = null!;
 
         /// <summary>
         /// Девайсы пользоваеля

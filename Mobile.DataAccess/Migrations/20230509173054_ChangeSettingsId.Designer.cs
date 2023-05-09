@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mobile.DataAccess.Contexts;
 
@@ -11,9 +12,11 @@ using Mobile.DataAccess.Contexts;
 namespace Mobile.DataAccess.Migrations
 {
     [DbContext(typeof(MobileReadContext))]
-    partial class MobileReadContextModelSnapshot : ModelSnapshot
+    [Migration("20230509173054_ChangeSettingsId")]
+    partial class ChangeSettingsId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -132,7 +135,8 @@ namespace Mobile.DataAccess.Migrations
                     b.HasIndex("ColorSchemeId")
                         .IsUnique();
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Settings", (string)null);
                 });
@@ -180,8 +184,8 @@ namespace Mobile.DataAccess.Migrations
                         .IsRequired();
 
                     b.HasOne("Mobile.DataAccess.Models.User", "User")
-                        .WithMany("Settings")
-                        .HasForeignKey("UserId")
+                        .WithOne("Settings")
+                        .HasForeignKey("Mobile.DataAccess.Models.Settings", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -200,7 +204,8 @@ namespace Mobile.DataAccess.Migrations
                 {
                     b.Navigation("Devices");
 
-                    b.Navigation("Settings");
+                    b.Navigation("Settings")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

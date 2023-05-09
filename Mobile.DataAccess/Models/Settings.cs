@@ -35,8 +35,13 @@ namespace Mobile.DataAccess.Models
         public bool EnableAutoPayment { get; set; }
 
         /// <summary>
+        /// Идентификатор пользователя
+        /// </summary>
+        public long UserId { get; set; }
+
+        /// <summary>
         /// Пользователи
         /// </summary>
-        public virtual List<User> Users { get; set; } = null!;
+        public virtual User User { get; set; } = null!;
     }
 }

@@ -28,7 +28,7 @@ namespace Mobile.Api.ApplicationLogic.Settings.Query
             }
 
             var user = await _mobileReadContext.Users.FirstAsync(x => x.UserMail == request.UserMail);
-            var settings = user.Settings;
+            var settings = user.Settings.FirstOrDefault();
             var colorScheme = settings?.ColorScheme;
 
             return new SettingsResponseViewModel
