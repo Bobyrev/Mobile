@@ -16,9 +16,9 @@ namespace Mobile.Api.ApplicationLogic.Device.Command
 
         public async Task Handle(DeleteDeviceCommand request, CancellationToken cancellationToken)
         {
-            var model = await _mobileWriteContext.Devices.FirstAsync(x => x.Id == request.Id, cancellationToken);
+            var model = await _mobileWriteContext.Users.FirstAsync(x => x.Id == request.Id, cancellationToken);
             
-            _mobileWriteContext.Devices.Remove(model);
+            _mobileWriteContext.Users.Remove(model);
             
             await _mobileWriteContext.SaveChangesAsync(cancellationToken);
         }

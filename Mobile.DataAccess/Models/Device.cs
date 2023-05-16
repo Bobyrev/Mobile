@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Mobile.DataAccess.Configuration;
+using Mobile.DataAccess.Configurations;
 
 namespace Mobile.DataAccess.Models
 {
@@ -12,12 +12,12 @@ namespace Mobile.DataAccess.Models
         /// <summary>
         /// Модель телефона
         /// </summary>
-        public string DeviceModel { get; set; }
+        public string DeviceModel { get; set; } = null!;
 
         /// <summary>
         /// Имя телефона
         /// </summary>
-        public string DeviceName { get; set; }
+        public string DeviceName { get; set; } = null!;
 
         /// <summary>
         /// Идентификатор регистрации
@@ -25,9 +25,14 @@ namespace Mobile.DataAccess.Models
         public Guid DeviceCode { get; set; }
 
         /// <summary>
-        /// Электронная почта пользователя
+        /// Идентификатор пользователя
         /// </summary>
-        public string UserEmail { get; set; }
+        public long UserId { get; set; }
+
+        /// <summary>
+        /// Пользователь
+        /// </summary>
+        public virtual User User { get; set; } = null!;
 
         /// <summary>
         /// Признак активации приложения

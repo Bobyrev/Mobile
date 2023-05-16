@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mobile.DataAccess.Contexts;
 
@@ -11,9 +12,11 @@ using Mobile.DataAccess.Contexts;
 namespace Mobile.DataAccess.Migrations
 {
     [DbContext(typeof(MobileReadContext))]
-    partial class MobileReadContextModelSnapshot : ModelSnapshot
+    [Migration("20230509160116_AddUsers")]
+    partial class AddUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -124,16 +127,9 @@ namespace Mobile.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("ColorSchemeId")
-                        .IsUnique();
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("ColorSchemeId");
 
                     b.ToTable("Settings", (string)null);
                 });
@@ -152,11 +148,16 @@ namespace Mobile.DataAccess.Migrations
                     b.Property<DateTime>("LastModifiedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<long>("SettingsId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("UserMail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SettingsId");
 
                     b.ToTable("Users", (string)null);
                 });
@@ -175,34 +176,38 @@ namespace Mobile.DataAccess.Migrations
             modelBuilder.Entity("Mobile.DataAccess.Models.Settings", b =>
                 {
                     b.HasOne("Mobile.DataAccess.Models.ColorScheme", "ColorScheme")
-                        .WithOne("Settings")
-                        .HasForeignKey("Mobile.DataAccess.Models.Settings", "ColorSchemeId")
+                        .WithMany("Settings")
+                        .HasForeignKey("ColorSchemeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Mobile.DataAccess.Models.User", "User")
-                        .WithOne("Settings")
-                        .HasForeignKey("Mobile.DataAccess.Models.Settings", "UserId")
+                    b.Navigation("ColorScheme");
+                });
+
+            modelBuilder.Entity("Mobile.DataAccess.Models.User", b =>
+                {
+                    b.HasOne("Mobile.DataAccess.Models.Settings", "Settings")
+                        .WithMany("Users")
+                        .HasForeignKey("SettingsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ColorScheme");
-
-                    b.Navigation("User");
+                    b.Navigation("Settings");
                 });
 
             modelBuilder.Entity("Mobile.DataAccess.Models.ColorScheme", b =>
                 {
-                    b.Navigation("Settings")
-                        .IsRequired();
+                    b.Navigation("Settings");
+                });
+
+            modelBuilder.Entity("Mobile.DataAccess.Models.Settings", b =>
+                {
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("Mobile.DataAccess.Models.User", b =>
                 {
                     b.Navigation("Devices");
-
-                    b.Navigation("Settings")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -15,9 +15,9 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.Get
 builder.Services.AddDbContext<MobileReadContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("MobileDB"));
-    options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+    //options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+    options.UseLazyLoadingProxies();
 });
-
 
 builder.Services.AddDbContext<MobileWriteContext>(options =>
 {
