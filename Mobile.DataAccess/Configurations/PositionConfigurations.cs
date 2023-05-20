@@ -4,13 +4,12 @@ using Mobile.DataAccess.Models;
 
 namespace Mobile.DataAccess.Configurations
 {
-    public class UserConfigurations : IEntityTypeConfiguration<User>
+    public class PositionConfigurations : IEntityTypeConfiguration<Position>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<Position> builder)
         {
-            builder.ToTable("Users");
+            builder.ToTable("Positions");
             builder.HasKey(x => x.Id);
-            builder.UseTptMappingStrategy();
         }
     }
 }

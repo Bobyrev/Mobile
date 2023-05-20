@@ -19,5 +19,12 @@ namespace Mobile.DataAccess.Contexts
         public DbSet<User> Users { get; set; }
         public DbSet<Settings> Settings { get; set; }
         public DbSet<ColorScheme> ColorSchemes { get; set; }
+        public DbSet<Admin> Admins { get; set; }
+        public DbSet<Coach> Coaches { get; set; }
+        public DbSet<Player> Players { get; set; }
+        public DbSet<Position> Positions { get; set; }
+        public DbSet<Place> Places { get; set; }
+        public DbSet<Team> Teams { get; set; }
+
     }
 }
