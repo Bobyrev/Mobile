@@ -22,5 +22,13 @@ namespace Mobile.Api.Controllers
 
             return Ok(data);
         }
+
+        [HttpGet("all_sql")]
+        public async Task<IActionResult> GetUsersBySql([FromQuery] GetTeamUsersSqlQuery query, CancellationToken cancellationToken)
+        {
+            var data = await _mediator.Send(query, cancellationToken);
+
+            return Ok(data);
+        }
     }
 }

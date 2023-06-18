@@ -15,6 +15,11 @@ namespace Mobile.DataAccess.Models
         public string UserMail { get; set; } = null!;
 
         /// <summary>
+        /// Имя пользователя
+        /// </summary>
+        public string Name { get; set; } = null!;
+
+        /// <summary>
         /// Настройки
         /// </summary>
         public virtual Settings Settings { get; set; } = null!;
