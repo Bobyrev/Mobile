@@ -20,6 +20,11 @@ namespace Mobile.ApiContracts.Device.Command
         public string UserEmail { get; set; }
 
         /// <summary>
+        /// Имя пользователя
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
         /// Признак активации приложения
         /// </summary>
         public bool IsActivated { get; set; }

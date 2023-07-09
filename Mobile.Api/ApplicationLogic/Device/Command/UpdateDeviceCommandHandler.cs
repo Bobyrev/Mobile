@@ -16,7 +16,10 @@ namespace Mobile.Api.ApplicationLogic.Device.Command
 
         public async Task Handle(UpdateDeviceCommand request, CancellationToken cancellationToken)
         {
-            var model = await _mobileWriteContext.Devices.FirstAsync(x => x.Id == request.Id, cancellationToken);
+            var model = await _mobileWriteContext.Devices.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+
+            if (model is null)
+                return;
 
             model.LastModifiedDate = DateTime.Now;
             model.DeviceModel = request.DeviceModel;

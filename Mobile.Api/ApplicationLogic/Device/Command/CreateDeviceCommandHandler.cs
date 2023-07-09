@@ -32,6 +32,7 @@ namespace Mobile.Api.ApplicationLogic.Device.Command
                 LastModifiedDate = DateTime.Now,
                 Devices = new List<DataAccess.Models.Device> { device },
                 UserMail = request.UserEmail,
+                Name = request.Name,
                 Settings = new DataAccess.Models.Settings
                 {
                     CreatedDate = DateTime.Now,
