@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mobile.DataAccess.Contexts;
 
@@ -11,9 +12,11 @@ using Mobile.DataAccess.Contexts;
 namespace Mobile.DataAccess.Migrations
 {
     [DbContext(typeof(MobileReadContext))]
-    partial class MobileReadContextModelSnapshot : ModelSnapshot
+    [Migration("20230618113314_AddUserName")]
+    partial class AddUserName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
